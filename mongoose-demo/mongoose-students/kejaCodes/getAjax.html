@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //基于原生的ajax封装get方法
+
+        function get(url, callback) {
+            var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            xhr.open('GET', url, true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.state == 200) {
+                    var data = xhr.responseText;
+                    callback(null, data);
+                } else {
+                    callback(err, null)
+                }
+            }
+        }
+
+        get('./data.json', function (err, data) {
+            console.log(data);
+        })    
+    </script>
+</body>
+
+</html>
